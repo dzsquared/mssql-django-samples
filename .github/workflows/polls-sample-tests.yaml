@@ -1,7 +1,7 @@
 name: Run Django Tests
 
 on:
-    manual:
+    workflow_dispatch:
 
 jobs:
     runtests:
