@@ -1,0 +1,43 @@
+name: Update Django staging database
+
+on:
+  push:
+    branches:
+      - dev-setup
+
+jobs:
+  runtests:
+    runs-on: ubuntu-latest
+    environment: tests
+    env:
+      SQLDB: ${{secrets.SQLDB}}
+      SQLHOST: ${{secrets.SQLHOST}}
+      SQLPASSWORD: ${{secrets.SQLPASSWORD}}
+      SQLUSER: ${{secrets.SQLUSER}}
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup Python version
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Create and start virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Prep migration
+        run: |
+          python polls-sample/mysite/manage.py makemigrations polls
+          python polls-sample/mysite/manage.py migrate polls
+      
+      - name: Commit Python Migration
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          message: "updated migrations"
+          add: 'polls-sample/mysite/polls/migrations/*'
