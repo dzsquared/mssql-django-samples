@@ -9,6 +9,11 @@ jobs:
   runtests:
     runs-on: ubuntu-latest
     environment: tests
+    env:
+      SQLDB: ${{secrets.SQLDB}}
+      SQLHOST: ${{secrets.SQLHOST}}
+      SQLPASSWORD: ${{secrets.SQLPASSWORD}}
+      SQLUSER: ${{secrets.SQLUSER}}
     steps:
       - uses: actions/checkout@master
 
