@@ -6,7 +6,7 @@ on:
       - dev-setup
 
 jobs:
-  runtests:
+  migratestaging:
     runs-on: ubuntu-latest
     environment: tests
     env:
