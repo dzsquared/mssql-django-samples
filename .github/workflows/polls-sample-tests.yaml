@@ -32,4 +32,3 @@ jobs:
 
       - name: Run tests
         run: python polls-sample/mysite/manage.py test polls
-      
