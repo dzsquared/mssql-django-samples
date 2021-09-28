@@ -5,7 +5,7 @@ ARG VARIANT=3
 FROM --platform=linux/amd64 mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
 ENV PYTHONUNBUFFERED 1
-ENV sqlhost="localhost" sqlpassword="P@ssw0rd"
+ENV SQLHOST="localhost" SQLPASSWORD="P@ssw0rd" SQLDB="SampleAppDB" SQLUSER="sa"
 
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID

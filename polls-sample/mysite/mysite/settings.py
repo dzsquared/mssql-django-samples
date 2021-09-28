@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,10 +78,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'SampleAppDB',
-        'HOST': os.environ['sqlhost'],
-        'USER': 'sa',
-        'PASSWORD': os.environ['sqlpassword'],
+        'NAME': os.environ['SQLDB'],
+        'HOST': os.environ['SQLHOST'],
+        'USER': os.environ['SQLUSER'],
+        'PASSWORD': os.environ['SQLPASSWORD'],
         'OPTIONS': {
                 'driver': 'ODBC Driver 17 for SQL Server',
                 'connection_retries': 25,
