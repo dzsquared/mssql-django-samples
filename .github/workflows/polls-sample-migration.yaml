@@ -33,6 +33,7 @@ jobs:
       - name: Prep migration
         run: |
           python polls-sample/mysite/manage.py makemigrations polls
+          python polls-sample/mysite/manage.py sqlmigrate polls 0001 > migrate0001.sql
           python polls-sample/mysite/manage.py migrate polls
       
       - name: Commit Python Migration
@@ -41,3 +42,8 @@ jobs:
           default_author: github_actions
           message: "updated migrations"
           add: 'polls-sample/mysite/polls/migrations/*'
+      
+      - name: Store SQL Artifact
+        uses: actions/upload-artifact@v2
+          name: 'migrate0001.sql'
+          path: 'migrate0001.sql'
