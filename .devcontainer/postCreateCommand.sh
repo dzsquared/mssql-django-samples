@@ -37,3 +37,7 @@ then
         fi
     done
 fi
+
+python ../polls-sample/mysite/manage.py migrate
+
+DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_PASSWORD=abc123 DJANGO_SUPERUSER_EMAIL=someone@microsoft.com python ../polls-sample/mysite/manage.py createsuperuser --noinput
